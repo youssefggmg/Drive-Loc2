@@ -57,6 +57,7 @@ class Blog
         $this->title = $_POST["title"] ?? "";
         $this->content = $_POST["content"] ?? "";
         $this->Image = $_POST["Image"] ?? "";
+        $this->BlogID = $_POST["blogID"] ?? "";
         $params = [];
         $query = "UPDATE Blog set ";
         if (!empty($this->title)) {
@@ -71,6 +72,8 @@ class Blog
             $query .= "image = :image, ";
             $params[":image"] = $this->Image;
         }
+        $query .= "WHERE id = :id";
+        $params["id"] = $this->BlogID;
 
         $stmt = $this->dbcon->prepare($query);
         $executed = $stmt->execute($params);
