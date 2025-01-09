@@ -32,7 +32,18 @@ class Comment
             die($e->getMessage());
         }
     }
-    
+    public function getAllComments()
+    {
+        $query = "SELECT * FROM comment";
+        try {
+            $stmt = $this->dbcon->prepare($query);
+            $stmt->execute();
+            $comments = $stmt->fetchAll();
+            return ["status" => 1, "message" => $comments];
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 
 }
 ?>
