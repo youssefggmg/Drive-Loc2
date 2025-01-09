@@ -64,6 +64,24 @@ class Comment
             die($e->getMessage());
         }
     }
+    public function deleteComment()
+    {
+        $this->id = $_POST["ID"];
+        $query = "DELETE FROM comment WHERE id = ':id'";
+        try {
+            $stmt = $this->dbcon->prepare($query);
+            $executed = $stmt->execute([
+                'id' => $this->id
+            ]);
+            if ($executed) {
+                return ["status" => 1, "message" => "comment was deleted successfully"];
+            } else {
+                return ["status" => 0, "message" => "comment was not deleted"];
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 
 }
 ?>
