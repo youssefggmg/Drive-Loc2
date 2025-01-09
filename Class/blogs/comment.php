@@ -44,6 +44,26 @@ class Comment
             die($e->getMessage());
         }
     }
+    public function editComment()
+    {
+        $this->id = $_POST["ID"];
+        $this->text = $_POST["COMMENT"];
+        $query = "UPDATE comment SET centext = ':text' WHERE id = ':id'";
+        try {
+            $stmt = $this->dbcon->prepare($query);
+            $executed = $stmt->execute([
+                'text' => $this->text,
+                'id' => $this->id
+            ]);
+            if ($executed) {
+                return ["status" => 1, "message" => "comment was edited successfully"];
+            } else {
+                return ["status" => 0, "message" => "comment was not edited"];
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 
 }
 ?>
