@@ -57,7 +57,7 @@
             </div>
 
             <div class="p-6 space-y-6">
-                <form action="#" method="post">
+                <form action="../../controllers/blogs/addBlog.php" method="post">
                     <div class=" flex flex-col gap-6">
                         <div>
                             <label for="title" class="text-sm font-medium text-gray-900 block mb-2">Title</label>
