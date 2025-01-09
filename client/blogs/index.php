@@ -104,14 +104,31 @@
                     <div class="col-lg-6">
                         <!-- Blog post-->
                         <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top"
-                                    src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                            <div class="card-body">
+                            <a href="#!">
+                                <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
+                                    alt="..." />
+                            </a>
+                            <div class="card-body" style="position: relative;">
                                 <div class="small text-muted">January 1, 2023</div>
                                 <h2 class="card-title h4">Post Title</h2>
                                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                     Reiciendis aliquid atque, nulla.</p>
                                 <a class="btn btn-primary" href="#!">Read more →</a>
+                                <!-- Heart Icon -->
+                                <div style="
+                                    position: absolute; 
+                                    bottom: 10px; 
+                                    right: 10px; 
+                                    background-color: white; 
+                                    border-radius: 50%; 
+                                    width: 30px; 
+                                    height: 30px; 
+                                    display: flex; 
+                                    justify-content: center; 
+                                    align-items: center; 
+                                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
+                                    ❤️
+                                </div>
                             </div>
                         </div>
                         <!-- Blog post-->
@@ -295,7 +312,8 @@
       cursor: pointer;
       z-index: 999;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    " onmouseover="this.style.backgroundColor='darkblue';" onmouseout="this.style.backgroundColor='blue';" href="./addBlog.php">+</button>
+    " onmouseover="this.style.backgroundColor='darkblue';" onmouseout="this.style.backgroundColor='blue';"
+        href="./addBlog.php">+</button>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
