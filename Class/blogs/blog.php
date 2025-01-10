@@ -147,7 +147,7 @@ class Blog
     }
     public function MYBlogs()
     {
-        $this->authorID = $_GET["id"];
+        $this->authorID = $_COOKIE["userID"];
         $query = "SELECT * FROM blog WHERE authorID = :id";
         try {
             $stmt = $this->dbcon->prepare($query);

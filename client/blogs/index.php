@@ -46,7 +46,7 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="home.php" class="nav-link">Home</a></li>
+                    <li class="nav-item active"><a href="../home.php" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="myReservations.php" class="nav-link">MyReservation</a></li>
                     <li class="nav-item"><a href="pricing.php" class="nav-link">Pricing</a></li>
                     <li class="nav-item"><a href="car.php" class="nav-link">Cars</a></li>
@@ -313,7 +313,7 @@
       z-index: 999;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     " onmouseover="this.style.backgroundColor='darkblue';" onmouseout="this.style.backgroundColor='blue';"
-        href="./addBlog.php">+</button>
+        ><a href="./addBlog.php">+</a></button>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

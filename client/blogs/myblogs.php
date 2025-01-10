@@ -1,3 +1,13 @@
+<?php
+include "../../Class/blogs/blog.php";
+include "../../instance/instace.php";
+
+$blog = new Blog($pdo);
+$result = $blog->MYBlogs();
+if ($result['status'] == 1) {
+    $myblogs = $result['message'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,7 +56,7 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="home.php" class="nav-link">Home</a></li>
+                    <li class="nav-item active"><a href="../home.php" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="myReservations.php" class="nav-link">MyReservation</a></li>
                     <li class="nav-item"><a href="pricing.php" class="nav-link">Pricing</a></li>
                     <li class="nav-item"><a href="car.php" class="nav-link">Cars</a></li>
@@ -104,90 +114,36 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!">
-                                <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
-                                    alt="..." />
-                            </a>
-                            <div class="card-body" style="position: relative;">
-                                <div class="small text-muted">January 1, 2023</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Reiciendis aliquid atque, nulla.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
-                                <!-- Heart Icon -->
-                                <div style="
-                                        position: absolute; 
-                                        bottom: 10px; 
-                                        right: 50px; 
-                                        background-color: white; 
-                                        border-radius: 50%; 
-                                        width: 30px; 
-                                        height: 30px; 
-                                        display: flex; 
-                                        justify-content: center; 
-                                        align-items: center; 
-                                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
-                                    ❤️
-                                </div>
-                                <!-- Edit Button -->
-                                <div style="
-                                        position: absolute; 
-                                        bottom: 10px; 
-                                        right: 10px; 
-                                        background-color: white; 
-                                        border-radius: 50%; 
-                                        width: 30px; 
-                                        height: 30px; 
-                                        display: flex; 
-                                        justify-content: center; 
-                                        align-items: center; 
-                                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
-                                        cursor: pointer;">
-                                    ✎
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top"
-                                    src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2023</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Reiciendis aliquid atque, nulla.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top"
-                                    src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2023</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Reiciendis aliquid atque, nulla.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
-                            </div>
-                        </div>
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top"
-                                    src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2023</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
-                            </div>
-                        </div>
-                    </div>
+                        <?php
+                        foreach ($myblogs as $blog) {
+                            echo "<div class='card mb-4'>
+                                        <a href='#!'>
+                                            <img class='card-img-top' src='". $blog["image"] ."' alt='...' />
+                                        </a>
+                                        <div class='card-body' style='position: relative;'>
+                                            <div class='small text-muted'>". $blog["creationdate"] ."</div>
+                                            <h2 class='card-title h4'>". $blog["title"] ."</h2>
+                                            <p class='card-text'> ". substr($blog["content"], 0, 100) .".....</p>
+                                            <a class='btn btn-primary' href='./blogPage/index.php?id=". $blog["blogid"] ."'>Read more →</a>
+                                            <div style='
+                                                    position: absolute; 
+                                                    bottom: 10px; 
+                                                    right: 10px; 
+                                                    background-color: white; 
+                                                    border-radius: 50%; 
+                                                    width: 30px; 
+                                                    height: 30px; 
+                                                    display: flex; 
+                                                    justify-content: center; 
+                                                    align-items: center; 
+                                                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+                                                    cursor: pointer;'>
+                                                <a href='editBlog.php?id=". $blog["blogid"] ."'>✎</a>
+                                            </div>
+                                        </div>
+                                    </div>";
+                        }
+                        ?>
                 </div>
                 <!-- Pagination-->
                 <nav aria-label="Pagination">
