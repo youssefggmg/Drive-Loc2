@@ -70,7 +70,7 @@ $allcars = $vehicul->allVehiculs($page);
 					<li class="nav-item"><a href="pricing.php" class="nav-link">Pricing</a></li>
 					<li class="nav-item active"><a href="car.php" class="nav-link">Cars</a></li>
 					<li class="nav-item"><a href="./blog/index.php" class="nav-link">Blog</a></li>
-					<li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
+					<li class="nav-item"><a href="C:/xampp/htdocs/Drive-Loc2/client/blogs/myblogs.php" class="nav-link">myBlogs</a></li>
 				</ul>
 			</div>
 		</div>

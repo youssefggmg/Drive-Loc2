@@ -51,7 +51,8 @@
                     <li class="nav-item"><a href="pricing.php" class="nav-link">Pricing</a></li>
                     <li class="nav-item"><a href="car.php" class="nav-link">Cars</a></li>
                     <li class="nav-item"><a href="index.php" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="myblogs.php" class="nav-link">myBlogs</a></li>
+                    <li class="nav-item"><a href="C:/xampp/htdocs/Drive-Loc2/client/blogs/myblogs.php"
+                            class="nav-link">myBlogs</a></li>
                 </ul>
             </div>
         </div>
@@ -116,21 +117,38 @@
                                 <a class="btn btn-primary" href="#!">Read more →</a>
                                 <!-- Heart Icon -->
                                 <div style="
-                                    position: absolute; 
-                                    bottom: 10px; 
-                                    right: 10px; 
-                                    background-color: white; 
-                                    border-radius: 50%; 
-                                    width: 30px; 
-                                    height: 30px; 
-                                    display: flex; 
-                                    justify-content: center; 
-                                    align-items: center; 
-                                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
+                                        position: absolute; 
+                                        bottom: 10px; 
+                                        right: 50px; 
+                                        background-color: white; 
+                                        border-radius: 50%; 
+                                        width: 30px; 
+                                        height: 30px; 
+                                        display: flex; 
+                                        justify-content: center; 
+                                        align-items: center; 
+                                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
                                     ❤️
+                                </div>
+                                <!-- Edit Button -->
+                                <div style="
+                                        position: absolute; 
+                                        bottom: 10px; 
+                                        right: 10px; 
+                                        background-color: white; 
+                                        border-radius: 50%; 
+                                        width: 30px; 
+                                        height: 30px; 
+                                        display: flex; 
+                                        justify-content: center; 
+                                        align-items: center; 
+                                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+                                        cursor: pointer;">
+                                    ✎
                                 </div>
                             </div>
                         </div>
+
                         <!-- Blog post-->
                         <div class="card mb-4">
                             <a href="#!"><img class="card-img-top"
@@ -295,25 +313,6 @@
             </div>
         </div>
     </footer>
-    <button style="
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: blue;
-      color: white;
-      width: 50px;
-      height: 50px;
-      border: none;
-      border-radius: 50%;
-      font-size: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      z-index: 999;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    " onmouseover="this.style.backgroundColor='darkblue';" onmouseout="this.style.backgroundColor='blue';"
-        href="./addBlog.php">+</button>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
