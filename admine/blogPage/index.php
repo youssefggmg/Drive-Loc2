@@ -2,10 +2,21 @@
 include "../../Class/blogs/blog.php";
 include "../../Class/blogs/comment.php";
 include "../../instance/instace.php";
+include "../Class/blogs/tags.php";
+
 $blog = new blog($pdo);
 $comment = new comment($pdo);
 $result = $blog->getSingleBlog()["message"];
 $allcomments = $comment->getAllComments();
+
+$blog = new Tags($pdo);
+$result = $blog->getTags();
+if ($result['status'] == 1) {
+    $tags = $result['data'];
+} elseif ($result['status'] == 0) {
+    echo $result['message'];
+    die();
+}
 ?>
 
 <!DOCTYPE html>
@@ -161,6 +172,21 @@ $allcomments = $comment->getAllComments();
                                 </ul>
                             </div>
                         </div>
+                        <h5 class="mt-4">Assign Tag to Blog</h5>
+                        <form method="post" action="assign_tag.php">
+                            <div class="form-group">
+                                <label for="tagSelect">Select Tag</label>
+                                <select class="form-control" id="tagSelect" name="tagID" required>
+                                    <?php foreach ($tags as $tag): ?>
+                                        <option value="<?= htmlspecialchars($tag['tagid']) ?>">
+                                            <?= htmlspecialchars($tag['tagname']) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <input type="hidden" name="blogID" value="<?= htmlspecialchars($_GET['id'] ?? '') ?>">
+                            <button type="submit" class="btn btn-primary">Assign Tag</button>
+                        </form>
                     </div>
                 </div>
             </div>

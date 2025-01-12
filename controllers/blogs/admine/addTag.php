@@ -1,7 +1,6 @@
 <?php 
 include "../../../Class/blogs/tags.php";
 include "../../../instance/instace.php";
-include "../../../admine/tags.php";
 
 
 $blog = new Tags($pdo);

@@ -23,7 +23,7 @@ if ($result['status'] == 1) {
 <body>
     <div class="container mt-5">
         <h2>Create Tag</h2>
-        <form method="post" action="path_to_your_backend_script">
+        <form method="post" action="../controllers/blogs/admine/addTag.php">
             <div class="form-group">
                 <label for="tagName">Tag Name</label>
                 <input type="text" class="form-control" id="tagName" name="tagName" placeholder="Enter tag name" required>
