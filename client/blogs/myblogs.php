@@ -117,162 +117,179 @@ if ($result['status'] == 1) {
                         <?php
                         foreach ($myblogs as $blog) {
                             echo "<div class='card mb-4'>
-                                        <a href='#!'>
-                                            <img class='card-img-top' src='". $blog["image"] ."' alt='...' />
-                                        </a>
-                                        <div class='card-body' style='position: relative;'>
-                                            <div class='small text-muted'>". $blog["creationdate"] ."</div>
-                                            <h2 class='card-title h4'>". $blog["title"] ."</h2>
-                                            <p class='card-text'> ". substr($blog["content"], 0, 100) .".....</p>
-                                            <a class='btn btn-primary' href='./blogPage/index.php?id=". $blog["blogid"] ."'>Read more →</a>
-                                            <div style='
-                                                    position: absolute; 
-                                                    bottom: 10px; 
-                                                    right: 10px; 
-                                                    background-color: white; 
-                                                    border-radius: 50%; 
-                                                    width: 30px; 
-                                                    height: 30px; 
-                                                    display: flex; 
-                                                    justify-content: center; 
-                                                    align-items: center; 
-                                                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
-                                                    cursor: pointer;'>
-                                                <a href='editBlog.php?id=". $blog["blogid"] ."'>✎</a>
-                                            </div>
+                                    <a href='#!'>
+                                        <img class='card-img-top' src='" . $blog["image"] . "' alt='...' />
+                                    </a>
+                                    <div class='card-body' style='position: relative;'>
+                                        <div class='small text-muted'>" . $blog["creationdate"] . "</div>
+                                        <h2 class='card-title h4'>" . $blog["title"] . "</h2>
+                                        <p class='card-text'> " . substr($blog["content"], 0, 100) . ".....</p>
+                                        <a class='btn btn-primary' href='./blogPage/index.php?id=" . $blog["blogid"] . "'>Read more →</a>
+                                        <div style='
+                                                position: absolute; 
+                                                bottom: 10px; 
+                                                right: 10px; 
+                                                background-color: white; 
+                                                border-radius: 50%; 
+                                                width: 30px; 
+                                                height: 30px; 
+                                                display: flex; 
+                                                justify-content: center; 
+                                                align-items: center; 
+                                                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+                                                cursor: pointer;'>
+                                            <a href='editBlog.php?id=" . $blog["blogid"] . "'>✎</a>
                                         </div>
-                                    </div>";
+                                        <div style='
+                                                position: absolute; 
+                                                bottom: 10px; 
+                                                right: 50px; 
+                                                background-color: white; 
+                                                border-radius: 50%; 
+                                                width: 30px; 
+                                                height: 30px; 
+                                                display: flex; 
+                                                justify-content: center; 
+                                                align-items: center; 
+                                                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+                                                cursor: pointer;'>
+                                            <a href='../../controllers/blogs/deleteBlog.php?ID=" . $blog["blogid"] . "'  style='color: red;'>🗑</a>
+                                        </div>
+                                    </div>
+                                  </div>";
                         }
                         ?>
+
+                    </div>
+                    <!-- Pagination-->
+                    <nav aria-label="Pagination">
+                        <hr class="my-0" />
+                        <ul class="pagination justify-content-center my-4">
+                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1"
+                                    aria-disabled="true">Newer</a></li>
+                            <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#!">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                            <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
+                            <li class="page-item"><a class="page-link" href="#!">15</a></li>
+                            <li class="page-item"><a class="page-link" href="#!">Older</a></li>
+                        </ul>
+                    </nav>
                 </div>
-                <!-- Pagination-->
-                <nav aria-label="Pagination">
-                    <hr class="my-0" />
-                    <ul class="pagination justify-content-center my-4">
-                        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1"
-                                aria-disabled="true">Newer</a></li>
-                        <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                        <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">Older</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <!-- Side widgets-->
-            <div class="col-lg-4">
-                <!-- Search widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Search</div>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Enter search term..."
-                                aria-label="Enter search term..." aria-describedby="button-search" />
-                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                <!-- Side widgets-->
+                <div class="col-lg-4">
+                    <!-- Search widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Search</div>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Enter search term..."
+                                    aria-label="Enter search term..." aria-describedby="button-search" />
+                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Categories widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Categories</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">Web Design</a></li>
-                                    <li><a href="#!">HTML</a></li>
-                                    <li><a href="#!">Freebies</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">JavaScript</a></li>
-                                    <li><a href="#!">CSS</a></li>
-                                    <li><a href="#!">Tutorials</a></li>
-                                </ul>
+                    <!-- Categories widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Categories</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled mb-0">
+                                        <li><a href="#!">Web Design</a></li>
+                                        <li><a href="#!">HTML</a></li>
+                                        <li><a href="#!">Freebies</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled mb-0">
+                                        <li><a href="#!">JavaScript</a></li>
+                                        <li><a href="#!">CSS</a></li>
+                                        <li><a href="#!">Tutorials</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Footer-->
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2"><a href="#" class="logo">Car<span>book</span></a></h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the blind texts.</p>
-                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4 ml-md-5">
-                        <h2 class="ftco-heading-2">Information</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">About</a></li>
-                            <li><a href="#" class="py-2 d-block">Services</a></li>
-                            <li><a href="#" class="py-2 d-block">Term and Conditions</a></li>
-                            <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
-                            <li><a href="#" class="py-2 d-block">Privacy &amp; Cookies Policy</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Customer Support</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">FAQ</a></li>
-                            <li><a href="#" class="py-2 d-block">Payment Option</a></li>
-                            <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
-                            <li><a href="#" class="py-2 d-block">How it works</a></li>
-                            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Have a Questions?</h2>
-                        <div class="block-23 mb-3">
-                            <ul>
-                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain
-                                        View, San Francisco, California, USA</span></li>
-                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929
-                                            210</span></a></li>
-                                <li><a href="#"><span class="icon icon-envelope"></span><span
-                                            class="text">info@yourdomain.com</span></a></li>
+        <!-- Footer-->
+        <footer class="ftco-footer ftco-bg-dark ftco-section">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-md">
+                        <div class="ftco-footer-widget mb-4">
+                            <h2 class="ftco-heading-2"><a href="#" class="logo">Car<span>book</span></a></h2>
+                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                                there live the blind texts.</p>
+                            <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
                             </ul>
                         </div>
                     </div>
+                    <div class="col-md">
+                        <div class="ftco-footer-widget mb-4 ml-md-5">
+                            <h2 class="ftco-heading-2">Information</h2>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="py-2 d-block">About</a></li>
+                                <li><a href="#" class="py-2 d-block">Services</a></li>
+                                <li><a href="#" class="py-2 d-block">Term and Conditions</a></li>
+                                <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
+                                <li><a href="#" class="py-2 d-block">Privacy &amp; Cookies Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="ftco-footer-widget mb-4">
+                            <h2 class="ftco-heading-2">Customer Support</h2>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="py-2 d-block">FAQ</a></li>
+                                <li><a href="#" class="py-2 d-block">Payment Option</a></li>
+                                <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
+                                <li><a href="#" class="py-2 d-block">How it works</a></li>
+                                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="ftco-footer-widget mb-4">
+                            <h2 class="ftco-heading-2">Have a Questions?</h2>
+                            <div class="block-23 mb-3">
+                                <ul>
+                                    <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St.
+                                            Mountain
+                                            View, San Francisco, California, USA</span></li>
+                                    <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929
+                                                210</span></a></li>
+                                    <li><a href="#"><span class="icon icon-envelope"></span><span
+                                                class="text">info@yourdomain.com</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
+                <div class="row">
+                    <div class="col-md-12 text-center">
 
-                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i class="icon-heart color-danger"
-                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
+                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script> All rights reserved | This template is made with <i class="icon-heart color-danger"
+                                aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
 </body>
 
 </html>
