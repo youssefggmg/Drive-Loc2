@@ -1,3 +1,13 @@
+<?php
+include "../../../Class/blogs/blog.php";
+include "../../../Class/blogs/comment.php";
+include "../../../instance/instace.php";
+$blog = new blog($pdo);
+$comment = new comment($pdo);
+$result = $blog->getSingleBlog()["message"];
+$allcomments = $comment->getAllComments();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,7 +64,8 @@
                     <li class="nav-item"><a href="pricing.php" class="nav-link">Pricing</a></li>
                     <li class="nav-item"><a href="car.php" class="nav-link">Cars</a></li>
                     <li class="nav-item"><a href="../index.php" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="C:/xampp/htdocs/Drive-Loc2/client/blogs/myblogs.php" class="nav-link">myBlogs</a></li>
+                    <li class="nav-item"><a href="C:/xampp/htdocs/Drive-Loc2/client/blogs/myblogs.php"
+                            class="nav-link">myBlogs</a></li>
                 </ul>
             </div>
         </div>
@@ -68,35 +79,16 @@
                     <!-- Post header-->
                     <header class="mb-4">
                         <!-- Post title-->
-                        <h1 class="fw-bolder mb-1">Welcome to Blog Post!</h1>
+                        <h1 class="fw-bolder mb-1"><?php echo $result["title"] ?></h1>
                         <!-- Post meta content-->
-                        <div class="text-muted fst-italic mb-2">Posted on January 1, 2023 by Start Bootstrap</div>
-                        <!-- Post categories-->
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+                        <div class="text-muted fst-italic mb-2">Posted on<?php echo $result["creationdate"] ?> </div>
                     </header>
                     <!-- Preview image figure-->
                     <figure class="mb-4"><img class="img-fluid rounded"
                             src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
                     <!-- Post content-->
                     <section class="mb-5">
-                        <p class="fs-5 mb-4">Science is an enterprise that should be cherished as an activity of the
-                            free human mind. Because it transforms who we are, how we live, and it gives us an
-                            understanding of our place in the universe.</p>
-                        <p class="fs-5 mb-4">The universe is large and old, and the ingredients for life as we know it
-                            are everywhere, so there's no reason to think that Earth would be unique in that regard.
-                            Whether of not the life became intelligent is a different question, and we'll see if we find
-                            that.</p>
-                        <p class="fs-5 mb-4">If you get asteroids about a kilometer in size, those are large enough and
-                            carry enough energy into our system to disrupt transportation, communication, the food
-                            chains, and that can be a really bad day on Earth.</p>
-                        <h2 class="fw-bolder mb-4 mt-5">I have odd cosmic thoughts every day</h2>
-                        <p class="fs-5 mb-4">For me, the most fascinating interface is Twitter. I have odd cosmic
-                            thoughts every day and I realized I could hold them to myself or share them with people who
-                            might be interested.</p>
-                        <p class="fs-5 mb-4">Venus has a runaway greenhouse effect. I kind of want to know what happened
-                            there because we're twirling knobs here on Earth without knowing the consequences of it.
-                            Mars once had running water. It's bone dry today. Something bad happened there as well.</p>
+                        <p class="fs-5 mb-4"><?php echo $result["content"] ?></p>
                     </section>
                 </article>
                 <!-- Comments section-->
@@ -104,18 +96,39 @@
                     <div class="card bg-light">
                         <div class="card-body">
                             <!-- Comment form-->
-                            <form class="mb-4"><textarea class="form-control" rows="3"
-                                    placeholder="Join the discussion and leave a comment!"></textarea></form>
+                            <form class="mb-4" method="post" action="../../../controllers/blogs/createComment.php">
+                                <textarea class="form-control" rows="3"
+                                    placeholder="Join the discussion and leave a comment!"></textarea>
+                                <button type="submit">create</button>
+                            </form>
                             <div class="d-flex mb-4">
                                 <!-- Parent comment-->
-                                <div class="flex-shrink-0"><img class="rounded-circle"
-                                        src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold">Commenter Name</div>
-                                    If you're going to lead a space frontier, it has to be government; it'll never be
-                                    private enterprise. Because the space frontier is dangerous, and it's expensive, and
-                                    it has unquantified risks.
-                                </div>
+                                <?php
+                                foreach ($allcomments as $comment) {
+                                    echo "<div class='flex-shrink-0'>
+            <img class='rounded-circle' src='https://dummyimage.com/50x50/ced4da/6c757d.jpg' alt='image' />
+          </div>
+          <div class='ms-3'>
+            <div class='fw-bold'>Commenter Name</div>
+            <div id='comment-text'>" . htmlspecialchars($comment["centext"]) . "</div>
+            <div id='edit-input' class='d-none'>
+                <form method='post' action='../../../controllers/blogs/editComment.php'>
+                    <input type='text' class='form-control'hidden name='ID'  value='" . htmlspecialchars($comment["commentID"]) . "' />
+                    <input type='text' class='form-control' name='COMMENT' value='" . htmlspecialchars($comment["centext"]) . "' />
+                    <button type='submit' class='btn btn-primary'>Save</button>
+                </form>
+            </div>";
+                                    if ($comment['userID'] == ($_COOKIE['userID'] ?? null)) {
+                                        echo "<div class='mt-2'>
+                <button id='edit-button' class='btn btn-primary btn-sm me-2' onclick='toggleEdit()'>Edit</button>
+                <button class='btn btn-danger btn-sm' href='../../../controllers/blogs/deleteBlog.php?ID= " . htmlspecialchars($comment["commentID"]) . "'>Delete</button>
+              </div>";
+                                    }
+
+                                    echo "</div>";
+                                }
+                                ?>
+
                             </div>
                         </div>
                     </div>

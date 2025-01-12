@@ -71,12 +71,6 @@
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                 placeholder="https://exemple.com" required="">
                         </div>
-                        <div>
-                            <label for="video" class="text-sm font-medium text-gray-900 block mb-2">Video url</label>
-                            <input type="text" name="video" id="video"
-                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                placeholder="https://exemple.com" required="">
-                        </div>
                         <div class="col-span-full">
                             <label for="content" class="text-sm font-medium text-gray-900 block mb-2">Blog
                                 content</label>

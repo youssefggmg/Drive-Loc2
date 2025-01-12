@@ -66,7 +66,7 @@ class Comment
     }
     public function deleteComment()
     {
-        $this->id = $_POST["ID"];
+        $this->id = $_GET["ID"];
         $query = "DELETE FROM comment WHERE id = ':id'";
         try {
             $stmt = $this->dbcon->prepare($query);
