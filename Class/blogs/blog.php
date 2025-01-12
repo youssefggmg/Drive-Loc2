@@ -2,6 +2,8 @@
 class Blog
 {
     private $dbcon;
+
+    private $state;
     private $title;
     private $content;
     private $Image;
@@ -39,6 +41,22 @@ class Blog
     public function getAPPBlogs()
     {
         $query = "SELECT * FROM blog where isapproved = 'approved'";
+        try {
+            $stmt = $this->dbcon->prepare($query);
+            $executed = $stmt->execute();
+            if ($executed) {
+                $rows = $stmt->fetchAll();
+                return ["status" => 1, "message" => $rows];
+            } else {
+                return ["status" => 0, "message" => "ther is some problem"];
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+    public function getALLBlogs()
+    {
+        $query = "SELECT * FROM blog ";
         try {
             $stmt = $this->dbcon->prepare($query);
             $executed = $stmt->execute();
@@ -142,10 +160,12 @@ class Blog
     public function ApproveBlog()
     {
         $this->BlogID = $_GET["id"];
-        $query = "UPDATE blog SET isapproved = approved WHERE id = :id";
+        $this->state = $_GET["isapproved"];
+        $query = "UPDATE blog SET isapproved = ':approved 'WHERE id = :id";
         try {
             $stmt = $this->dbcon->prepare($query);
             $params = ["id" => $this->BlogID];
+            $params["approved"] = $this->state;
             $executed = $stmt->execute($params);
             if ($executed) {
                 return ["status" => 1, "message" => "blog was approved successfully"];
