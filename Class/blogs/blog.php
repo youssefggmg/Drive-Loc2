@@ -38,7 +38,7 @@ class Blog
     }
     public function getAPPBlogs()
     {
-        $query = "SELECT * FROM blog where isapproved = approved";
+        $query = "SELECT * FROM blog where isapproved = 'approved'";
         try {
             $stmt = $this->dbcon->prepare($query);
             $executed = $stmt->execute();
@@ -101,19 +101,30 @@ class Blog
         }
     }
     public function search()
-    {
-        $this->title = $_GET["title"];
-        $query = "SELECT * FROM blog WHERE title LIKE ':title '";
-        try {
-            $stmt = $this->dbcon->prepare($query);
-            $params = [":title" => $this->title];
-            $stmt->execute($params);
-            $result = $stmt->fetchAll();
-            return ["status" => 1, "message" => $result];
-        } catch (PDOException $e) {
-            die($e->getMessage());
-        }
+{
+    $this->title = $_GET["title"]; 
+    $query = "SELECT * FROM blog WHERE title LIKE :title"; 
+
+    try {
+        $stmt = $this->dbcon->prepare($query); 
+
+        $params = [":title" => "%" . $this->title . "%"];
+
+        $stmt->execute($params); 
+
+        $result = $stmt->fetchAll();
+
+        return [
+            "status" => 1,
+            "message" => !empty($result) ? $result : "No results found."
+        ];
+    } catch (PDOException $e) {
+        return [
+            "status" => 0,
+            "message" => $e->getMessage()
+        ];
     }
+}
     public function getSingleBlog()
     {
         $this->BlogID = $_GET["id"];
