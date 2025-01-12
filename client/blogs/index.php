@@ -160,6 +160,7 @@ if ($result['status'] == 1) {
                                 aria-label="Enter search term..." aria-describedby="button-search" />
                             <button class="btn btn-primary" id="button-search" type="button">Go!</button>
                         </div>
+                        <div id="search-results" class="mt-4"></div>
                     </div>
                 </div>
                 <!-- Categories widget-->
@@ -283,29 +284,49 @@ if ($result['status'] == 1) {
     <script src="js/scripts.js"></script>
     <script>
         let searchValue = '';
-        function handleInputChange(event) {
-            // Update the searchValue variable
-            searchValue = event.target.value;
+        document.getElementById("button-search").addEventListener("click", async () => {
+            const searchInput = document.getElementById("search-input").value.trim();
+            const searchResultsDiv = document.getElementById("search-results");
 
-            // Send the data to the endpoint
-            fetch(`../../controllers/blogs/search.php?title=${encodeURIComponent(searchValue)}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
+            // Clear previous results
+            searchResultsDiv.innerHTML = "";
+
+            if (!searchInput) {
+                searchResultsDiv.innerHTML = "<p class='text-danger'>Please enter a search term.</p>";
+                return;
+            }
+
+            try {
+                // Send a GET request to the search endpoint
+                const response = await fetch(`../../controllers/blogs/search.php?title=${encodeURIComponent(searchInput)}`);
+                const data = await response.json();
+
+                if (data.status === 1) {
+                    const results = data.message;
+
+                    if (Array.isArray(results) && results.length > 0) {
+                        // Create result cards for each blog
+                        results.forEach((blog) => {
+                            const blogCard = `
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">${blog.title}</h5>
+                                <p class="card-text">${blog.content.substring(0, 100)}...</p>
+                                <a href="./blogPage/index.php?id=${blog.blogid}" class="btn btn-primary">Read More →</a>
+                            </div>
+                        </div>`;
+                            searchResultsDiv.innerHTML += blogCard;
+                        });
+                    } else {
+                        searchResultsDiv.innerHTML = "<p>No blogs found matching your search.</p>";
                     }
-                    return response.json(); // Assuming the endpoint returns JSON
-                })
-                .then(data => {
-                    console.log('Search results:', data);
-                    // Handle the returned data here (e.g., update the UI)
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        }
-
-        // Attach the event listener to the input
-        document.getElementById('search-input').addEventListener('input', handleInputChange);
+                } else {
+                    searchResultsDiv.innerHTML = `<p class='text-danger'>Error: ${data.message}</p>`;
+                }
+            } catch (error) {
+                searchResultsDiv.innerHTML = `<p class='text-danger'>An error occurred: ${error.message}</p>`;
+            }
+        });
 
     </script>
 </body>

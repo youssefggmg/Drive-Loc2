@@ -3,6 +3,8 @@ include "../../Class/blogs/blog.php";
 include "../../instance/instace.php";
 
 $blog = new Blog($pdo);
+$myblogs=[];
+
 $result = $blog->MYBlogs();
 if ($result['status'] == 1) {
     $myblogs = $result['message'];
