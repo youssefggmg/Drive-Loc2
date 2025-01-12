@@ -25,7 +25,7 @@ class Tags
 
     public function addTag()
     {
-        $this->tagname= $_POST['tagName'];
+        $this->tagname = $_POST['tagName'];
         try {
             $query = "INSERT INTO tags (tagname) VALUES (:tagname)";
             $stmt = $this->dbcon->prepare($query);
@@ -62,6 +62,25 @@ class Tags
             $stmt->bindParam(':tagid', $tagID);
             $stmt->execute();
             return ['status' => 1, 'message' => 'Tag deleted successfully'];
+        } catch (PDOException $e) {
+            return ['status' => 0, 'message' => $e->getMessage()];
+        }
+    }
+    public function getTagsByBlogId($blogID)
+    {
+        try {
+            $query = "
+            SELECT t.tagname 
+            FROM tagBlog tb
+            INNER JOIN tags t ON tb.tag = t.tagid
+            WHERE tb.blog = :blogID
+        ";
+            $stmt = $this->dbcon->prepare($query);
+            $stmt->bindParam(':blogID', $blogID, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return ['status' => 1, 'data' => $result];
         } catch (PDOException $e) {
             return ['status' => 0, 'message' => $e->getMessage()];
         }
