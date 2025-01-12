@@ -25,6 +25,7 @@ class Tags
 
     public function addTag()
     {
+        $this->tagname= $_POST['tagName'];
         try {
             $query = "INSERT INTO tags (tagname) VALUES (:tagname)";
             $stmt = $this->dbcon->prepare($query);
