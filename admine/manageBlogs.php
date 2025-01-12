@@ -87,12 +87,15 @@ if ($result['status'] == 1) {
                             </select>
                         </td>
                         <td class="p-3 text-center">
-                            <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700">Delete</button>
+                            <a href="blogPage/index.php?id=<?= $blog['blogid'] ?>"
+                                class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700">Read More</a>
+                            <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700"><a href="../controllers/blogs/deleteBlog.php?ID<?=$blog['blogid'] ?>">Delete</a></button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
+
     </div>
     <footer class="ftco-footer ftco-bg-dark ftco-section">
         <div class="container">
