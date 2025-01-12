@@ -17,6 +17,17 @@ if ($result['status'] == 1) {
     echo $result['message'];
     die();
 }
+$blogID = $_GET['id'] ?? null;
+
+if ($blogID) {
+    $result = $tags->getTagsByBlogId($blogID);
+
+    if ($result['status'] === 1) {
+        $tagNames = $result['data'];
+    } else {
+        echo "Error: " . $result['message'];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -154,39 +165,17 @@ if ($result['status'] == 1) {
                 </div>
                 <!-- Categories widget-->
                 <div class="card mb-4">
-                    <div class="card-header">Categories</div>
+                    <div class="card-header">Tags for Blog</div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">Web Design</a></li>
-                                    <li><a href="#!">HTML</a></li>
-                                    <li><a href="#!">Freebies</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">JavaScript</a></li>
-                                    <li><a href="#!">CSS</a></li>
-                                    <li><a href="#!">Tutorials</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <h5 class="mt-4">Assign Tag to Blog</h5>
-                        <form method="post" action="assign_tag.php">
-                            <div class="form-group">
-                                <label for="tagSelect">Select Tag</label>
-                                <select class="form-control" id="tagSelect" name="tagID" required>
-                                    <?php foreach ($tags as $tag): ?>
-                                        <option value="<?= htmlspecialchars($tag['tagid']) ?>">
-                                            <?= htmlspecialchars($tag['tagname']) ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <input type="hidden" name="blogID" value="<?= htmlspecialchars($_GET['id'] ?? '') ?>">
-                            <button type="submit" class="btn btn-primary">Assign Tag</button>
-                        </form>
+                        <ul class="list-unstyled">
+                            <?php if (!empty($tagNames)): ?>
+                                <?php foreach ($tagNames as $tag): ?>
+                                    <li><?= htmlspecialchars($tag['tagname']) ?></li>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <li>No tags assigned to this blog.</li>
+                            <?php endif; ?>
+                        </ul>
                     </div>
                 </div>
             </div>

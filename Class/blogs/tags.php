@@ -78,7 +78,7 @@ class Tags
             $stmt = $this->dbcon->prepare($query);
             $stmt->bindParam(':blogID', $blogID, PDO::PARAM_INT);
             $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
 
             return ['status' => 1, 'data' => $result];
         } catch (PDOException $e) {
