@@ -1,6 +1,6 @@
 <?php
-include "../../Class/blogs/blog.php";
-include "../../instance/instace.php";
+include "../Class/blogs/blog.php";
+include "../instance/instace.php";
 
 $blog = new Blog($pdo);
 $result = $blog->getAllBlogs();

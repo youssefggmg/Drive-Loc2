@@ -6,11 +6,11 @@ class Tags
     private $tagID;
     private $blogID;
 
-
     public function __construct($dbcon)
     {
         $this->dbcon = $dbcon;
     }
+
     public function getTags()
     {
         try {
@@ -19,9 +19,10 @@ class Tags
             $result = $stmt->fetchAll();
             return ['status' => 1, 'data' => $result];
         } catch (PDOException $e) {
-            die($e->getMessage());
+            return ['status' => 0, 'message' => $e->getMessage()];
         }
     }
+
     public function addTag()
     {
         try {
@@ -31,9 +32,10 @@ class Tags
             $stmt->execute();
             return ['status' => 1, 'message' => 'Tag added successfully'];
         } catch (PDOException $e) {
-            die($e->getMessage());
+            return ['status' => 0, 'message' => $e->getMessage()];
         }
     }
+
     public function assignTag()
     {
         $this->tagID = $_POST["tagID"];
@@ -47,7 +49,20 @@ class Tags
             ]);
             return ['status' => 1, 'message' => 'Tag assigned successfully'];
         } catch (PDOException $e) {
-            die($e->getMessage());
+            return ['status' => 0, 'message' => $e->getMessage()];
+        }
+    }
+
+    public function deleteTag($tagID)
+    {
+        try {
+            $query = "DELETE FROM tags WHERE tagid = :tagid";
+            $stmt = $this->dbcon->prepare($query);
+            $stmt->bindParam(':tagid', $tagID);
+            $stmt->execute();
+            return ['status' => 1, 'message' => 'Tag deleted successfully'];
+        } catch (PDOException $e) {
+            return ['status' => 0, 'message' => $e->getMessage()];
         }
     }
 }
